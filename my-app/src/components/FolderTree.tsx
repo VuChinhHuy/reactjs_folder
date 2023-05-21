@@ -2,6 +2,8 @@
 import type {  DirectoryTreeProps } from 'antd/es/tree';
 import { DownOutlined, FolderTwoTone} from '@ant-design/icons';
 import DirectoryTree from 'antd/es/tree/DirectoryTree';
+import { getName } from '../helpers/helperMethods';
+import path from 'path';
 
 
 export const FolderTree = (props: any) => {

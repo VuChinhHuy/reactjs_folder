@@ -9,7 +9,9 @@ import { serverData } from "./data/data";
 import type { MenuProps } from "antd";
 import {
   detailFolder,
+  editDataItem,
   formatData,
+  getFolderPath,
   getFolderTree,
   getName,
   searchTreeItem,
@@ -52,7 +54,17 @@ function App() {
       case 'Edit':
         try{
           const values = await form.validateFields();
-          console.log('Success:', values);
+          // console.log('Success:', values.name);
+          const folderPath = getFolderPath(selectedTreeItem?.path);
+          const newPath = `${folderPath}/${values.name}`
+    
+          // const existingItem = searchTreeItem(stateData, { path: newPath });
+          // console.log(existingItem)
+          
+            const updatedData = editDataItem(stateData, selectedTreeItem!, newPath);
+            setStateData(formatData(updatedData));
+            setSelectedTreeItem(searchTreeItem(updatedData, { path: newPath }));
+          
           setOpenModal(false);
         }
         catch(error)

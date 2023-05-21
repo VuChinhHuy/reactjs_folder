@@ -101,12 +101,11 @@ const mapData = (data: [] | any) => {
   }
   return data.map(
     (item: { path: string | undefined; size: any; items: string | any[] }) => {
-      const name = getName(item.path);
       return {
-        name: name,
+        name: getName(item.path),
         path: item.path,
         size: item.size,
-        icon: convertExtensionToIcon(name),
+        icon: convertExtensionToIcon(getName(item.path)),
         items: item.items && item.items.length ? mapData(item.items) : [],
       };
     }
@@ -200,4 +199,23 @@ export const checkFileIsMp = (nameFile: string) => {
       default:
         return false;
     }
+  };
+
+  export const editDataItem = (data:any, selectedItem: FileModel, newPath: string) => {
+    if (!data) { return data; }
+    const newItems: FileModel[] = [];
+  
+    for (let index = 0; index < data.length; index++) {
+      const currentItem = { ...data[index] };
+      if (currentItem.path === selectedItem.path) {
+        currentItem.path = newPath;
+        currentItem.dateModified = new Date();
+      }
+  
+      if (currentItem.items) {
+        currentItem.items = editDataItem(currentItem.items, selectedItem, newPath);
+      }
+      newItems.push(currentItem);
+    }
+    return newItems;
   };
