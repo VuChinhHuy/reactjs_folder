@@ -1,3 +1,5 @@
+import { Form, FormProps } from "antd";
+
 export interface FileModel {
  path?: string;
  expanded?: boolean;
@@ -14,14 +16,17 @@ export interface IconType {
  iconClass?: string;
  type?: string;
 };
-// export interface ContextMenuEvent {
-//  event: React.MouseEvent<HTMLDivElement | HTMLSpanElement, MouseEvent>;
-//  dataItem: FileModel;
-//  itemId?: string;
-//  tree?: boolean;
-// };
 
-// export interface ContextMenuProps {
-//  onContextMenuCLick: (e:any) => void;
-//  offset?: Offset;
-// };
+export interface Offset {
+ top: number;
+ left: number;
+}
+
+export interface ModalFormModel {
+    open: boolean,
+    title : string,
+    content:JSX.Element,
+    onOk?: () =>void,
+    onCancel? : () => void
+
+}

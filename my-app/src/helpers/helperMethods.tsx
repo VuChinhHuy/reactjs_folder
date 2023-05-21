@@ -1,5 +1,6 @@
 import { FileModel } from "../interfaces/FileManagerModels";
 
+
 export const convertExtensionToIcon = (item: string | null | undefined) => {
   if (!item) {
     return null;
@@ -181,13 +182,13 @@ const checkFileIsImage = (nameFile: string) => {
     case "jpeg":
     case "jpg":
       return true;
-      break;
+      
     default:
       return false;
   }
 };
 
-const checkFileIsMp = (nameFile: string) => {
+export const checkFileIsMp = (nameFile: string) => {
     const extension: string | null =
       nameFile.split(".").length > 1 ? nameFile.split(".")[1] : null;
     switch (extension ? extension.toLowerCase() : null) {
@@ -195,7 +196,7 @@ const checkFileIsMp = (nameFile: string) => {
       case "mp3":
       case "mp4":
         return true;
-        break;
+        
       default:
         return false;
     }
